@@ -28,11 +28,6 @@ def euclidean_distance(a,b):
 
 
 #Cosine: dot(A,B) / (norm(A) * norm(B))
-
-#x . y = 3*1 + 2*0 + 0*0 + 5*0 = 3
-#||x|| = √ (3)^2 + (2)^2 + (0)^2 + (5)^2 = 6.16
-#||y|| = √ (1)^2 + (0)^2 + (0)^2 + (0)^2 = 1
-#(x, y) = 3 / (6.16 * 1) = 0.49
  
 def cosine_similarity(a,b):
     a=np.array(a)
@@ -45,13 +40,13 @@ def cosine_similarity(a,b):
     mag_b= np.sqrt(np.sum(b**2))
 
     if mag_a==0 or mag_b==0:
-        raise ValueError("Cannot compute cosine similarity for zero magnitude vector.") 
+        return 0.0
 
     return float (dot_prod/(mag_a*mag_b))
 
 #print(cosine_similarity([3,2,0,5],[0,0,0,0]))  # test
 
-
+# function to intepret the similarity score
 
 def interpret_score(score):
    
@@ -66,6 +61,30 @@ def interpret_score(score):
     elif score >= 0.1:
         return "Weakly similar"
     else:
-        return "Not similar"    
+        return "Not similar at all"    
+    
+#print (cosine_similarity([8,3],[4,6]))
 
-print(interpret_score(0.72)) 
+
+
+#find top-k similar embeddings function
+
+def find_top_k(query_emb, corpus_embs, k=5):
+        
+    scores = []
+
+    # 1) compare query with every corpus embedding
+    for i, doc_emb in enumerate(corpus_embs):
+        score = cosine_similarity(query_emb, doc_emb)
+        scores.append((i, score))  # store (index, score)
+
+    # 2) sort by score 
+
+    def get_score(item):
+        return item[1]  # item = (index, score)
+    
+    scores = sorted(scores, key=get_score, reverse=True)
+
+
+    # 3) return only top k
+    return scores[:k]
