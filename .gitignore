@@ -9,3 +9,6 @@ __pycache__/
 .pytest_cache/
 
 .DS_Store
+
+*.pkl
+*.npz
