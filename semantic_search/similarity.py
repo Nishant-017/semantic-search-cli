@@ -48,7 +48,7 @@ def cosine_similarity(a,b):
 
 # function to intepret the similarity score
 
-def interpret_score(score):
+def interpret_cosine(score):
    
     if score >= 0.9:
         return "Extremely similar"
@@ -63,9 +63,28 @@ def interpret_score(score):
     else:
         return "Not similar at all"    
     
-#print (cosine_similarity([8,3],[4,6]))
 
+def interpret_euclidean(score):
+    if score <= 0.5:
+        return "Extremely Close"
+    elif score <= 1.0:
+        return "Close"
+    elif score <= 1.5:
+        return "Moderately Close"
+    elif score <= 2.0:
+        return "Weak Similarity"
+    else:
+        return "Not close at all"
 
+def interpret_dot_product(score):
+    if score >= 1.0:
+        return "High"
+    elif score >= 0.5:
+        return "Medium"
+    elif score >= 0.0:
+        return "Low"
+    else:
+        return "Very unrelated"
 
 #find top-k similar embeddings function
 
