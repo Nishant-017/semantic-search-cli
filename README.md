@@ -23,8 +23,8 @@ semantic-search/
 ├── tests/
 │ ├── test_embeddings.py
 │ └── test_similarity.py
-├── data/
-│ └── excuses.txt # Sample documents file (one per line)
+│ └── test_index.py
+├── file.txt
 ├── requirements.txt
 └── README.md
 
