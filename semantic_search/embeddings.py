@@ -6,7 +6,7 @@ class EmbeddingGenerator:
     def __init__(self, model_name: str = "BAAI/bge-small-en-v1.5"):
         self.model_name = model_name
         self.dimensions = None
-        self._model = None  # lazy loading
+        self._model = None  # lazy loading : that is model only loads for the first time
 
     def _load_model(self):
         if self._model is None:
